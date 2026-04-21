@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoobi Doobi Dance - Dark Layout</title>
+    <style>
+        body {
+            background-color: #050505; /* Pure Deep Dark */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            perspective: 1000px; /* For 3D depth */
+        }
+
+        /* The Stage with Spotlight */
+        .stage {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.05) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 80%);
+        }
+
+        /* Dynamic, Glowing Lyrics */
+        .lyrics {
+            position: absolute;
+            top: 15%;
+            width: 100%;
+            text-align: center;
+            color: #f1c40f; /* Yellowish Gold */
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(241, 196, 15, 0.7);
+            animation: textPulse 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes textPulse {
+            0% { transform: scale(1); text-shadow: 0 0 15px rgba(241, 196, 15, 0.7); }
+            100% { transform: scale(1.05); text-shadow: 0 0 25px rgba(241, 196, 15, 1); }
+        }
+
+        /* Couple Dance Floor container */
+        .dance-floor {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px; /* Space between boy and girl */
+            align-items: flex-end;
+            z-index: 10;
+        }
+
+        /* Common Silhouette Base */
+        .silhouette {
+            width: 150px; /* Size appropriate for silhouette */
+            height: 250px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            filter: brightness(0); /* Pure black silhouette */
+            position: relative;
+        }
+
+        /* --- PLACEHOLDER SILHOUETTES (Replace with real PNGs) --- */
+        
+        /* Boy Placeholder (Simplified human shape using CSS) */
+        .boy {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Male_silhouette.svg'); /* Generic male shape */
+            animation: boyDance 1.2s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        /* Girl Placeholder (Simplified human shape using CSS) */
+        .girl {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/12/Female_silhouette.svg'); /* Generic female shape */
+            animation: girlDance 1.2s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        /* 🕺 BOY'S DANCE ANIMATION (Energetic, leading) */
+        @keyframes boyDance {
+            0%, 100% { 
+                transform: translateX(0) rotate(-3deg) scaleY(1); 
+            }
+            25% { 
+                transform: translateX(-10px) rotate(2deg) scaleY(1.02); /* Slight lean & bounce */
+            }
+            50% { 
+                transform: translateX(0) rotate(5deg) scaleY(1); /* Return & twist */
+            }
+            75% { 
+                transform: translateX(10px) rotate(-2deg) scaleY(1.02); /* Step to other side */
+            }
+        }
+
+        /* 💃 GIRL'S DANCE ANIMATION (Swaying, responsive) */
+        @keyframes girlDance {
+            0%, 100% { 
+                transform: translateX(0) rotate(3deg) scaleY(1.02); 
+            }
+            25% { 
+                transform: translateX(10px) rotate(-2deg) scaleY(1); /* Mirror boy's movement */
+            }
+            50% { 
+                transform: translateX(0) rotate(-5deg) scaleY(1.02); /* Sway back */
+            }
+            75% { 
+                transform: translateX(-10px) rotate(2deg) scaleY(1); /* Twist away */
+            }
+        }
+
+        /* Twinkling Stars / Rain effect for 'Zoobi Doobi' vibe */
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: twinkle 2s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: translateY(0); }
+            50% { opacity: 0.7; transform: translateY(-20px); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="stage">
+    <div class="lyrics">Param pampa... Zoobi Doobi!</div>
+    
+    <div class="dance-floor">
+        <div class="silhouette boy" id="boy"></div>
+        <div class="silhouette girl" id="girl"></div>
+    </div>
+    
+    <div id="stars-container"></div>
+</div>
+
+<script>
+    // Purely for generating random twinkling "rain" stars in background
+    const container = document.getElementById('stars-container');
+    for(let i=0; i<80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        // Random placement
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 80 + 'vh';
+        
+        // Random size and duration
+        const size = Math.random() * 3 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+        
+        container.appendChild(star);
+    }
+</script>
+
+</body>
+</html>
